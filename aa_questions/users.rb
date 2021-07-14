@@ -1,6 +1,6 @@
 require_relative 'questions_database'
 
-class User
+class Users
 
     attr_accessor :fname, :lanme, :id
 
@@ -14,8 +14,21 @@ class User
                 id = ?
         SQL
 
-        User.new(users.first)
+        Users.new(users.first)
     end
+
+    def self.find_by_name(fname, lname)
+     users = QuestionsDatabaseConnection.instance.execute(<<-SQL, fname, lname)
+            SELECT
+                *
+            FROM
+                users
+            WHERE
+                fname = ? AND lname = ?
+        SQL
+
+        users.map {|user| Users.new(user)}
+    end 
 
     def initialize(options)
         @fname = options['fname']
