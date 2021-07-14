@@ -55,6 +55,23 @@ class Users
         QuestionLikes.liked_questions_for_user_id(@id)
     end
 
+    def average_karma 
+         karma = QuestionsDatabaseConnection.instance.execute(<<-SQL, id)
+            SELECT
+                COUNT(DISTINCT(question_likes.questions_id)) / 
+                CAST(COUNT(DISTINCT(questions.id)) AS FLOAT) AS average  
+            FROM
+                questions
+            LEFT OUTER JOIN 
+                question_likes ON question_likes.questions_id = questions.id
+
+            WHERE
+                questions.author_id = ? 
+        SQL
+
+        karma.first["average"]
+    end 
+
     def save 
         if @id == nil 
             QuestionsDatabaseConnection.instance.execute(<<-SQL, @fname, @lname)

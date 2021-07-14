@@ -51,7 +51,7 @@ class QuestionFollows
     questions.map {|question| Questions.new(question)}
 end 
 
-    def most_followed_questions(n=1)
+    def self.most_followed_questions(n=1)
         questions = QuestionsDatabaseConnection.instance.execute(<<-SQL, n)
             SELECT
                 *
@@ -62,7 +62,7 @@ end
             GROUP BY 
                 question_follows.questions_id
             ORDER BY 
-                COUNT(*) DESC LIMIT n
+                COUNT(*) DESC LIMIT ?
         SQL
 
         questions.map {|question| Questions.new(question)}
