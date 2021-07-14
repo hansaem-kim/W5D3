@@ -52,7 +52,10 @@ INSERT INTO
     questions(title, body, author_id)
 VALUES
     ('Algebra', 'x + 2 = 5', 3),
-    ('Philosphy', 'What is the meaning of life?', 2);
+    ('Philosphy', 'What is the meaning of life?', 2),
+    ('Question3', 'body of question3?', 2),
+    ('Question4', 'body of question4?', 1),
+    ('Question5', 'body of question5?', 2);
     
 INSERT INTO 
     replies (subject_questions_id, parent_reply_id, users_id, body)

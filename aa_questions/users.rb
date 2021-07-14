@@ -1,4 +1,6 @@
 require_relative 'questions_database'
+require_relative 'questions'
+require_relative 'replies'
 
 class Users
 
@@ -35,4 +37,14 @@ class Users
         @lname = options['lname']
         @id = options['id']
     end
+
+    def authored_questions
+        Questions.find_by_author_id(@id)
+    end
+
+    def authored_replies
+        Replies.find_by_user_id(@id)
+    end
+    
+
 end
