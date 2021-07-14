@@ -51,6 +51,10 @@ class Users
         QuestionFollows.followed_questions_for_user_id(@id)
     end 
 
+    def liked_questions
+        QuestionLikes.liked_questions_for_user_id(@id)
+    end
+
     def save 
         if @id == nil 
             QuestionsDatabaseConnection.instance.execute(<<-SQL, @fname, @lname)

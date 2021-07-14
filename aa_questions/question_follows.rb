@@ -62,7 +62,7 @@ end
             GROUP BY 
                 question_follows.questions_id
             ORDER BY 
-                COUNT(*) DESC LIMIT 1
+                COUNT(*) DESC LIMIT n
         SQL
 
         questions.map {|question| Questions.new(question)}
