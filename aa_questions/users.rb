@@ -59,9 +59,9 @@ class Users
                 VALUES
                     (?, ?)
             SQL
-            QuestionsDatabaseConnection.instance.last_insert_row_id
+            self.id = QuestionsDatabaseConnection.instance.last_insert_row_id
         else  
-            QuestionsDatabaseConnection.instance.execute(<<-SQL, @id, @fname, @lname)
+            QuestionsDatabaseConnection.instance.execute(<<-SQL, @fname, @lname, @id)
                 UPDATE
                     users
                 SET
@@ -70,9 +70,8 @@ class Users
                     users.id = ?
             SQL
         end 
-        self 
     end 
 end
 
-a = Users.new("fname" => "Elon", "lname" => "Musk")
-a.save 
+a = Users.new("fname" => "three", "lname" => "four")
+a.save
